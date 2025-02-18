@@ -32,6 +32,23 @@ return {
     config = function()
       require('fidget').setup()
     end
+
+  },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   ft = { "markdown" },
+  --   build = function() vim.fn["mkdp#util#install"]() end,
+  -- },
+-- install with yarn or npm
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
   --
   -- {
@@ -53,4 +70,10 @@ return {
   -- 		},
   -- 	},
   -- },
+  --
+  {
+    "dgox16/oldworld.nvim",
+    lazy = false, -- Only load when the plugin is actually in use
+    priority = 1000,
+  },
 }
