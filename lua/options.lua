@@ -2,6 +2,10 @@ require "nvchad.options"
 
 -- add yours here!
 --
+--
+
+vim.cmd "hi Function gui=italic"
+vim.cmd "hi Keyword gui=italic"
 
 vim.opt.relativenumber = true
 
