@@ -76,4 +76,16 @@ return {
     lazy = false, -- Only load when the plugin is actually in use
     priority = 1000,
   },
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^5",
+    ft = { "rust" },
+    config = function(_,_)
+      local on_attach = require("nvchad.configs.lspconfig").on_attach
+      vim.g.rustaceanvim = {
+        server = {
+          on_attach = on_attach        },
+      }
+    end
+},
 }
