@@ -21,5 +21,11 @@ autocmd("VimEnter", {
 autocmd("VimLeavePre", {
   command = ":silent !kitty @ set-spacing padding=20 margin=10",
 })
+
+-- add format on save
+autocmd("BufWritePre", {
+  pattern = { "*.c", "*.h", "*.cpp", "*.hpp", "*.json", "*.py", "*.lua", "*.sh" },
+  command = "lua vim.lsp.buf.format()",
+})
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
