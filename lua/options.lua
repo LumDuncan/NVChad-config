@@ -6,6 +6,7 @@ require "nvchad.options"
 
 vim.cmd "hi Function gui=italic"
 vim.cmd "hi Keyword gui=italic"
+vim.cmd [[autocmd FileType * set formatoptions-=ro]]
 
 vim.opt.relativenumber = true
 
