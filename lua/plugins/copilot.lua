@@ -1,46 +1,49 @@
 -- Add the following blocks in to your custom/plugins.lua file to install the plugins
 --
-local overrides = require("configs.copilot")
+local overrides = require "configs.copilot"
 
 local plugins = {
-  -- ... all your other plugins ...
-   {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = overrides.copilot
-  },
+    -- ... all your other plugins ...
 
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
+    { import = "nvchad.blink.lazyspec" },
+    {
+        "zbirenbaum/copilot.lua",
+        event = "InsertEnter",
+        opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+            filetypes = {
+                markdown = true,
+                help = true,
+            },
+        },
     },
-    config = function(_, opts)
-      vim.opt.completeopt = {'menu','menuone','noselect','noinsert'}
-      local cmp = require "cmp"
-      opts.sources = {
-        { name = "nvim_lsp", group_index = 2 },
-        { name = "copilot",  group_index = 2 },
-        { name = "luasnip",  group_index = 2 },
-        { name = "buffer",   group_index = 2 },
-        { name = "nvim_lua", group_index = 2 },
-        { name = "path",     group_index = 2 },
-      }
-      opts.mapping = cmp.mapping.preset.insert({
-        ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
-        ["<S-CR>"] = cmp.mapping.confirm({ select = true }),
-      })
-      cmp.setup(opts)
-    end,
-   },
+    {
+        "saghen/blink.cmp",
+        optional = true,
+        dependencies = { "fang2hou/blink-copilot" },
+        opts = {
+            sources = {
+                default = { "copilot" },
+                providers = {
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-copilot",
+                        score_offset = 100,
+                        async = true,
+                    }
+                }
+            },
+            keymap = {
+                preset = 'default',
+                ['<C-space'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
+                ['<S-CR>'] = { function(cmp) cmp.select_and_accept() end },
+                ['<C-e>'] = { function(cmp) cmp.hide() end },
+                ['<C-j>'] = { function(cmp) cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert }) end },
+                ['<CR>'] = {},
+            },
+        }
+    },
 }
 
 return plugins

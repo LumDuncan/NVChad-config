@@ -26,7 +26,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.cmd([[
-augroup FTOptions 
+augroup FTOptions
   autocmd!
   autocmd FileType c,cpp setlocal commentstring=//\ %s
 ]])
@@ -61,21 +61,18 @@ end)
 if vim.g.neovide then
   -- Neovide settings
   --
-  -- make commands to change the scale factor. 
+  -- make commands to change the scale factor.
   vim.g.neovide_scale_factor = 1.0
-local change_scale_factor = function(delta)
-  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
-end
-vim.keymap.set("n", "<C-=>", function()
-  change_scale_factor(1.25)
-end)
-vim.keymap.set("n", "<C-->", function()
-  change_scale_factor(1/1.25)
-end)
+  local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+  end
+  vim.keymap.set("n", "<C-=>", function()
+    change_scale_factor(1.25)
+  end)
+  vim.keymap.set("n", "<C-->", function()
+    change_scale_factor(1 / 1.25)
+  end)
 
-  -- Add the desired animation effects: 
+  -- Add the desired animation effects:
   vim.g.neovide_cursor_vfx_mode = "railgun"
-
-
 end
-

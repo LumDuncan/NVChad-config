@@ -15,24 +15,33 @@ return {
       require "configs.lspconfig"
     end,
   },
-  {'numToStr/Comment.nvim',
-  opts = {
-    config = function()
-     require('Comment').setup()
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      config = function()
+        require('Comment').setup()
 
-    local ft = require('Comment.ft')
+        local ft = require('Comment.ft')
 
-    ft.set('c', '//%s')
-    end
-  }
+        ft.set('c', '//%s')
+      end
+    }
   },
-  {'nvchad/volt', lazy = true },
-  {'nvchad/menu', lazy = true},
-  {"j-hui/fidget.nvim",
+  { 'nvchad/volt', lazy = true },
+  { 'nvchad/menu', lazy = true },
+  {
+    "j-hui/fidget.nvim",
     config = function()
       require('fidget').setup()
     end
 
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = "DiffviewOpen",
+    config = function()
+      require("diffview").setup()
+    end,
   },
   -- {
   --   "iamcco/markdown-preview.nvim",
@@ -40,7 +49,7 @@ return {
   --   ft = { "markdown" },
   --   build = function() vim.fn["mkdp#util#install"]() end,
   -- },
--- install with yarn or npm
+  -- install with yarn or npm
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -80,12 +89,12 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^5",
     ft = { "rust" },
-    config = function(_,_)
+    config = function(_, _)
       local on_attach = require("nvchad.configs.lspconfig").on_attach
       vim.g.rustaceanvim = {
         server = {
-          on_attach = on_attach        },
+          on_attach = on_attach },
       }
     end
-},
+  },
 }
