@@ -48,6 +48,11 @@ local plugins = {
         prebuilt_binaries = { download = false },
         implementation = 'prefer_rust_with_warning',
       },
+      completion = {
+        ghost_text = {
+          enabled = false,
+        },
+      },
     }
   },
 }
